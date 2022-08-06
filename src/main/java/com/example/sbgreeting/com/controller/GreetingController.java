@@ -8,6 +8,8 @@ import com.example.sbgreeting.com.service.IGreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -46,7 +48,11 @@ public class GreetingController {
         savefile.save(user);
     }
     @GetMapping("/find")
-    public User findGreetById(@RequestParam long id) {
-        return greetingService.getById(id);
+    public Optional<User> findGreetById(@RequestParam long id) {
+        return Optional.ofNullable(greetingService.getById(id));
+    }
+    @GetMapping("/allgreetings")
+    public List<User> findAllGreeting() {
+        return greetingService.getAllGreetingMessages();
     }
 }
