@@ -1,12 +1,12 @@
 package com.example.sbgreeting.com.controller;
 
+import com.example.sbgreeting.com.dto.UserDto;
 import com.example.sbgreeting.com.model.Greeting;
+import com.example.sbgreeting.com.model.User;
+import com.example.sbgreeting.com.repositary.IGreetingRepository;
 import com.example.sbgreeting.com.service.IGreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -35,5 +35,14 @@ public class GreetingController {
     public Greeting greeting() {
         return greetingService.greetingMessage();
 
+    }
+    @PostMapping("/greeting")
+    public String greetingMessage(@RequestBody UserDto userDto) {
+        return greetingService.greetingMessageByName(userDto);
+    }
+    @Autowired
+    IGreetingRepository savefile;
+    public void save(User user){
+        savefile.save(user);
     }
 }
