@@ -16,13 +16,13 @@ public class GreetingController {
     private final AtomicLong counter = new AtomicLong();
 
     //     curl localhost:8089/greeting => @return={id =1 , content="hello world!}
-//        localhost:8089/greeting?name=Santhosh =>  @return= { id=2, content="hello Santhosh!!!
+    //     localhost:8089/greeting?name=Santhosh =>  @return= { id=2, content="hello Santhosh!!!
     @GetMapping(value = {"/greeting", "/greeting/", "/greeting/home"})
     public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
 
-    //    localhost:8089/greeting/Santhosh => @return={id =1 , content="hello Santhosh!!!}
+    //   localhost:8089/greeting/Santhosh => @return={id =1 , content="hello Santhosh!!!}
     @GetMapping("greeting/{name}")
     public Greeting greetings(@PathVariable String name) {
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
@@ -30,7 +30,7 @@ public class GreetingController {
     @Autowired
     private IGreetingService greetingService;
 
-    //       *localhost:8089/greeting/service => @return={id =1 , content="hello world!}
+    //   localhost:8089/greeting/service => @return={id =1 , content="hello world!}
     @GetMapping("greeting/service")
     public Greeting greeting() {
         return greetingService.greetingMessage();
