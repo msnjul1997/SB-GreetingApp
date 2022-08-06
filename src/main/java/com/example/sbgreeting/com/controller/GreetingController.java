@@ -45,4 +45,8 @@ public class GreetingController {
     public void save(User user){
         savefile.save(user);
     }
+    @GetMapping("/find")
+    public User findGreetById(@RequestParam long id) {
+        return greetingService.getById(id);
+    }
 }
