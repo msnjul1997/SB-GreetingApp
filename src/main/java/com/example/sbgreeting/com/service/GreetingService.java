@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Service
@@ -32,4 +33,10 @@ public class GreetingService implements IGreetingService {
         modelMapper.map(userDto, user);
         iGreetingRepository.save(user);
         return ("Hello " + user.getFirstName() + " " + user.getLastName());
-    }}
+    }
+    @Override
+    public User getById(long id) {
+        Optional<User> greetById = iGreetingRepository.findById(id);
+        return greetById.orElse(null);
+    }
+}
