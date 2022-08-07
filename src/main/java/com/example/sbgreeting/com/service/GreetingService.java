@@ -27,6 +27,7 @@ public class GreetingService implements IGreetingService {
     public Greeting greetingMessage() {
         return new Greeting(counter.incrementAndGet(), String.format(template));
     }
+
     @Override
     public String greetingMessageByName(UserDto userDto) {
         User user = new User();
@@ -35,13 +36,26 @@ public class GreetingService implements IGreetingService {
         iGreetingRepository.save(user);
         return ("Hello " + user.getFirstName() + " " + user.getLastName());
     }
+
+
     @Override
     public User getById(long id) {
         Optional<User> greetById = iGreetingRepository.findById(id);
         return greetById.orElse(null);
     }
+
     @Override
     public List<User> getAllGreetingMessages() {
         return iGreetingRepository.findAll();
+    }
+    @Override
+    public User updateGreetMessage(long id, UserDto userDto) {
+        Optional<User> update = iGreetingRepository.findById(id);
+        if (update.isPresent()) {
+            update.get().setFirstName(userDto.getFirstName());
+            update.get().setLastName(userDto.getLastName());
+            iGreetingRepository.save(update.get());
+        }
+        return update.get();
     }
 }
