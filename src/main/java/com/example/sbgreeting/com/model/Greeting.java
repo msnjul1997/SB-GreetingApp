@@ -3,7 +3,6 @@ package com.example.sbgreeting.com.model;
 public class Greeting {
     private long id;
     private String content;
-
     public long getId() {
         return id;
     }

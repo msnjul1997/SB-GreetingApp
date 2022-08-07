@@ -1,13 +1,16 @@
 package com.example.sbgreeting.com.model;
 
 import javax.persistence.*;
+//mark class as an Entity
+@Entity
 
-@Entity //mark class as an Entity
-@Table //defining class name as Table name
+//defining class name as Table name
+@Table(name = "Greetings")
 public class User {
     @Id //mark id as primary key
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private long id;
+
     private String firstName;
     private String lastName;
 

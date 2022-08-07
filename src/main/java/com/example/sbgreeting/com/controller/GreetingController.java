@@ -29,13 +29,13 @@ public class GreetingController {
     public Greeting greetings(@PathVariable String name) {
         return new Greeting(counter.incrementAndGet(), String.format(template, name));
     }
-    @Autowired
-    private IGreetingService greetingService;
-
+      @Autowired
+      private IGreetingService greetingService;
     //   localhost:8089/greeting/service => @return={id =1 , content="hello world!}
     @GetMapping("greeting/service")
     public Greeting greeting() {
         return greetingService.greetingMessage();
+
 
     }
     @PostMapping("/greeting")
@@ -47,12 +47,18 @@ public class GreetingController {
     public void save(User user){
         savefile.save(user);
     }
+
     @GetMapping("/find")
-    public Optional<User> findGreetById(@RequestParam long id) {
-        return Optional.ofNullable(greetingService.getById(id));
+    public User findGreetById(@RequestParam long id) {
+        return greetingService.getById(id);
     }
     @GetMapping("/allgreetings")
     public List<User> findAllGreeting() {
         return greetingService.getAllGreetingMessages();
+    }
+    @PutMapping("/editmessage/{id}")
+    public User editGreetMesage(@PathVariable long id, @RequestBody UserDto userDto) {
+        return greetingService.updateGreetMessage(id, userDto);
+
     }
 }
