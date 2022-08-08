@@ -38,6 +38,8 @@ public class GreetingController {
 
 
     }
+    //POST : localhost:8089/greeting =>JSON: {"id": "1","firstName": "vamshi","lastName": "kalyan"}
+    //Hello vamshi kalyan
     @PostMapping("/greeting")
     public String greetingMessage(@RequestBody UserDto userDto) {
         return greetingService.greetingMessageByName(userDto);
@@ -56,11 +58,19 @@ public class GreetingController {
     public List<User> findAllGreeting() {
         return greetingService.getAllGreetingMessages();
     }
+    //first use get method
+    //PUT : localhost:8089/editmessage/1 =>JSON: {"id": "1","firstName": "vamshi","lastName": "kalyan"}
+    //o/p:{
+    //    "id": 1,
+    //    "firstName": "vamshi",
+    //    "lastName": "kalyan"
+    //}
     @PutMapping("/editmessage/{id}")
     public User editGreetMesage(@PathVariable long id, @RequestBody UserDto userDto) {
         return greetingService.updateGreetMessage(id, userDto);
 
     }
+    //DELETE : localhost:8089/deletemessage/8 => Record Deleted
     @DeleteMapping("/deletemessage/{id}")
     public String deleteGreetMessage(@PathVariable long id) {
         return greetingService.deleteGreetMessage(id);

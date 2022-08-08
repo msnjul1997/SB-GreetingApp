@@ -46,6 +46,7 @@ public class GreetingService implements IGreetingService {
 
     @Override
     public List<User> getAllGreetingMessages() {
+
         return iGreetingRepository.findAll();
     }
     @Override
