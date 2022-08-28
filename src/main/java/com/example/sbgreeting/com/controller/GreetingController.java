@@ -35,8 +35,6 @@ public class GreetingController {
     @GetMapping("greeting/service")
     public Greeting greeting() {
         return greetingService.greetingMessage();
-
-
     }
     //POST : localhost:8089/greeting =>JSON: {"id": "1","firstName": "vamshi","lastName": "kalyan"}
     //Hello vamshi kalyan
@@ -49,7 +47,6 @@ public class GreetingController {
     public void save(User user){
         savefile.save(user);
     }
-
     @GetMapping("/find")
     public User findGreetById(@RequestParam long id) {
         return greetingService.getById(id);
@@ -68,7 +65,6 @@ public class GreetingController {
     @PutMapping("/editmessage/{id}")
     public User editGreetMesage(@PathVariable long id, @RequestBody UserDto userDto) {
         return greetingService.updateGreetMessage(id, userDto);
-
     }
     //DELETE : localhost:8089/deletemessage/8 => Record Deleted
     @DeleteMapping("/deletemessage/{id}")
